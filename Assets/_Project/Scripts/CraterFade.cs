@@ -8,7 +8,7 @@ public class CraterFade : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DOVirtual.Float(1, 0, 3, (f) => GetComponent<MeshRenderer>().material.DOColor = f);
+        //DOVirtual.Float(1, 0, 3, (f) => GetComponent<MeshRenderer>().material.DOColor = f);
     }
 
 
