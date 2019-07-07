@@ -90,11 +90,7 @@ public class PlayerShooting : MonoBehaviour
         
             BaseProjectile tempProjectile = Instantiate<GameObject>(ProjectileObj).GetComponent<BaseProjectile>();
 
-            tempProjectile.Prepare(RightHandObj.transform.position, _currentEnemy);
-
-            
-
-            
-        
+            tempProjectile.Prepare(RightHandObj.transform.position, _currentEnemy.transform.position);
+                                
     }
 }

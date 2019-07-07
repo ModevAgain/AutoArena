@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8760e386233a914488625d4e60c39e7a, type: 3}
+  m_Name: MarineData
+  m_EditorClassIdentifier: 
+  MoveSpeed: 2
+  MoveRange: 12
+  MovementType: 0
+  AttackSpeed: 1
+  MaxConsecutiveAttacks: 1
+  EnemyAttack: {fileID: 11400000, guid: f1b8dc0d651eb5047b0d5c185a4e04e7, type: 2}

@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 8963813820986325359}
   - component: {fileID: 4952984749953051757}
   - component: {fileID: 8529805301943488944}
+  - component: {fileID: 5410583700483257438}
+  - component: {fileID: 5718127361517819833}
   m_Layer: 0
   m_Name: MarineBullet
   m_TagString: Untagged
@@ -41,7 +43,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3222777225513887674}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.19
@@ -62,6 +64,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5410583700483257438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3222777225513887674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba55d2a03f7f25f45bb26a367980b673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 0.35
+--- !u!114 &5718127361517819833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3222777225513887674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acb74f308f55df84cb0df803366aa995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4014131232434772518
 GameObject:
   m_ObjectHideFlags: 0

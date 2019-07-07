@@ -20,9 +20,9 @@ public class BaseProjectile : MonoBehaviour
         GetComponentInChildren<ColliderEventCatcher>().TriggerEnter = OnTriggerEnter;
     }
 
-    public void Prepare(Vector3 startPos, EnemyBehaviour target)
+    public void Prepare(Vector3 startPos, Vector3 target)
     {
-        _target = target.transform.position;
+        _target = target;
         _startPos = startPos;
         transform.position = startPos;
         _target.y = transform.position.y;
@@ -47,14 +47,9 @@ public class BaseProjectile : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, _target, Speed);
     }
 
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Enemy")
-        {
-            other.GetComponent<EnemyBehaviour>().Die();
-            Destroy(this.gameObject);
-        }
-        else if(other.tag == "Wall")
+    public virtual void OnTriggerEnter(Collider other)
+    {       
+        if(other.tag == "Wall")
         {
             Destroy(this.gameObject);
         }
