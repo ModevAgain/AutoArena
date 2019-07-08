@@ -22510,4 +22510,12 @@ AnimationClip:
     script: {fileID: 0}
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.2
+    functionName: TriggerAnimationEvent
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: 35d4f62e14f403f468103c3344993ac8,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

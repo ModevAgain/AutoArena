@@ -8,6 +8,7 @@ public class PlayerShooting : MonoBehaviour
     [Header("Data")]
     public float AttackSpeed;
     public float AttackRange;
+    public float Damage;
     public GameObject ProjectileObj;
     public Transform RightHandObj;
 
@@ -76,7 +77,7 @@ public class PlayerShooting : MonoBehaviour
         if (_currentEnemy != null)
         {
             transform.LookAt(_currentEnemy.transform);
-            _animator.SetTrigger("Attack");
+            _animator.SetTrigger("Attack");            
             Invoke("FireAttackFromAnimation", 0.5f);
             _currentEnemy.IsBeingAttacked(true);
         }
@@ -90,7 +91,7 @@ public class PlayerShooting : MonoBehaviour
         
             BaseProjectile tempProjectile = Instantiate<GameObject>(ProjectileObj).GetComponent<BaseProjectile>();
 
-            tempProjectile.Prepare(RightHandObj.transform.position, _currentEnemy.transform.position);
+            tempProjectile.Prepare(RightHandObj.transform.position, _currentEnemy.transform.position, Damage);
                                 
     }
 }

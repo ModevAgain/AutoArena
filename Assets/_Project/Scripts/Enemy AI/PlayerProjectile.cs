@@ -8,7 +8,7 @@ public class PlayerProjectile : BaseProjectile
     {
         if (other.tag == "Enemy")
         {
-           // other.GetComponentInParent<EnemyBehaviour>().Die();
+            other.GetComponentInParent<EnemyBehaviour>().GetDamage(_dmg);
             Destroy(this.gameObject);
         }
 

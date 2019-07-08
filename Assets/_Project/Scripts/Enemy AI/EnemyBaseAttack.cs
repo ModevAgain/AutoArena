@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyBaseAttack : ScriptableObject
 {
+    public float Damage;
     public float Range;
     public Vector3 AttackStartPos;
 

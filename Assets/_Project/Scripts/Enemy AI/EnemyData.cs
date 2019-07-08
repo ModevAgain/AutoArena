@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyData", menuName = "Data/EnemyData")]
 public class EnemyData : ScriptableObject
 {
+    [Header("Idle")]
+    public float IdleTime;
+
     [Header("Movement")]
     public float MoveSpeed;
     public float MoveRange;
@@ -15,4 +18,5 @@ public class EnemyData : ScriptableObject
     public int MaxConsecutiveAttacks;
     public EnemyBaseAttack EnemyAttack;
 
+    
 }

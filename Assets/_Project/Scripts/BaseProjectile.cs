@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class BaseProjectile : MonoBehaviour
 {
-    [Header("Data")]
+    [Header("References")]
+    public Transform MuzzleFlash;
+    
 
+    [Header("Data")]
     public float Speed;
 
     private Vector3 _target;
@@ -13,15 +16,17 @@ public class BaseProjectile : MonoBehaviour
     private bool _active;
     private Vector3 _startPos;
     private float _distance = 0;
+    protected float _dmg;
     
 
-    private void Awake()
+    public virtual void Awake()
     {
         GetComponentInChildren<ColliderEventCatcher>().TriggerEnter = OnTriggerEnter;
     }
 
-    public void Prepare(Vector3 startPos, Vector3 target)
+    public void Prepare(Vector3 startPos, Vector3 target, float dmg)
     {
+        _dmg = dmg;
         _target = target;
         _startPos = startPos;
         transform.position = startPos;
@@ -29,15 +34,23 @@ public class BaseProjectile : MonoBehaviour
 
         RaycastHit hit;
 
-        if(Physics.Raycast(_startPos, _target - _startPos, out hit, 10000, 1 << 10)){
+        if(Physics.Raycast(_startPos, _target - _startPos, out hit, 10000, 1 << 9)){
             _target = hit.point; 
         }
+
+        UnParentMuzzleFlash();
 
         _active = true;
     }
 
-
+    public void UnParentMuzzleFlash()
+    {
+   
+        if(MuzzleFlash != null)
+            MuzzleFlash.parent = null;
     
+    }
+
     void Update()
     {
         if (!_active)
@@ -53,5 +66,10 @@ public class BaseProjectile : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        Destroy(this.gameObject);
+
+        if (MuzzleFlash != null)
+            Destroy(MuzzleFlash.gameObject);
     }
 }

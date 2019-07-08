@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8760e386233a914488625d4e60c39e7a, type: 3}
   m_Name: MarineData
   m_EditorClassIdentifier: 
+  IdleTime: 1.2
   MoveSpeed: 2
   MoveRange: 12
   MovementType: 0
-  AttackSpeed: 1
-  MaxConsecutiveAttacks: 1
+  AttackSpeed: 20
+  MaxConsecutiveAttacks: 4
   EnemyAttack: {fileID: 11400000, guid: f1b8dc0d651eb5047b0d5c185a4e04e7, type: 2}

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -20,13 +21,14 @@ public class PlayerMovement : MonoBehaviour
         _playerShooting = GetComponent<PlayerShooting>();
         _animator = GetComponentInChildren<Animator>();
         _agent.updateRotation = false;
+        Crater.SetActive(false);
 
         StartCoroutine(CustomStartFall());
     }
 
     private void Start()
     {
-        
+        //DOVirtual.DelayedCall(3f, () => Crater.SetActive(false));
     }
 
     public void Update()
@@ -93,6 +95,8 @@ public class PlayerMovement : MonoBehaviour
             yield return null;
 
         _animator.SetBool("Landed", true);
+
+        FindObjectOfType<CameraManager>().OnFinishedFalling();
         
     }
 
@@ -102,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _touchedGround = true;
             GetComponent<Rigidbody>().isKinematic = true;
+            Crater.GetComponent<CraterFade>().Fade();
             _agent.enabled = true;
             Crater.SetActive(true);
 
