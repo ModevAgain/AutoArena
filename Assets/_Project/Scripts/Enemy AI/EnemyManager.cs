@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,11 +7,13 @@ using UnityEngine.AI;
 public class EnemyManager : MonoBehaviour
 {
     public List<EnemyBehaviour> SpawnedEnemies;
+    public Action AllEnemiesDefeated;
 
     [Header("DEBUG")]
     public bool DEBUG_SpawnEnemies;
     public int DEBUG_SpawnCount;
-    public GameObject DEBUG_SpawnObj;
+    public GameObject DEBUG_SpawnObj_Marine;
+    public GameObject DEBUG_SpawnObj_Robot;
 
     private void Awake()
     {
@@ -21,7 +24,13 @@ public class EnemyManager : MonoBehaviour
     {
         if (DEBUG_SpawnEnemies || Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SpawnEnemies(DEBUG_SpawnCount, DEBUG_SpawnObj);
+            SpawnEnemies(DEBUG_SpawnCount, DEBUG_SpawnObj_Marine);
+            DEBUG_SpawnEnemies = false;
+        }
+
+        if (DEBUG_SpawnEnemies || Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SpawnEnemies(DEBUG_SpawnCount, DEBUG_SpawnObj_Robot);
             DEBUG_SpawnEnemies = false;
         }
     }
@@ -44,6 +53,11 @@ public class EnemyManager : MonoBehaviour
     public void UnregisterEnemy(EnemyBehaviour enemy)
     {
         SpawnedEnemies.Remove(enemy);
+
+        if(SpawnedEnemies.Count == 0)
+        {
+            AllEnemiesDefeated?.Invoke();
+        }
     }
 
 

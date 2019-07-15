@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: MarineData
   m_EditorClassIdentifier: 
   IdleTime: 1.2
-  MoveSpeed: 2
-  MoveRange: 12
+  MaxHealth: 20000
+  PushBackMultiplier: 17.16
+  MoveSpeed: 1.5
+  MoveRange: 9
   MovementType: 0
   AttackSpeed: 20
+  AttackRange: 1000
   MaxConsecutiveAttacks: 4
-  EnemyAttack: {fileID: 11400000, guid: f1b8dc0d651eb5047b0d5c185a4e04e7, type: 2}

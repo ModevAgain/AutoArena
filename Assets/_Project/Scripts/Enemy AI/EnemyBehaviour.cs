@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 using DG.Tweening;
+using System.Linq;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     [Header("Data")]
     public EnemyData Data;
+    public EnemyBaseAttack Attack;
     public float Health = 100;
 
     [Header("etc")]
@@ -23,7 +25,9 @@ public class EnemyBehaviour : MonoBehaviour
     protected EnemyManager _enemyMan;
     protected Animator _animator;
     protected AnimationEventCatcher _animCatcher;
+    protected Rigidbody _rigid;
 
+    [Header("DEBUG")]
     #region AI Behaviour
 
     #region StateMachine
@@ -44,7 +48,7 @@ public class EnemyBehaviour : MonoBehaviour
         UpdateAIState();
     }
 
-    public void UpdateAIState()
+    public virtual void UpdateAIState()
     {
         if (_currentState == State.IDLE)
         {
@@ -114,12 +118,16 @@ public class EnemyBehaviour : MonoBehaviour
     
     public virtual void UpdateMovement()
     {
+        if (!_agent.enabled)
+            _agent.enabled = true;
+
         if(_agent.velocity == Vector3.zero)
         {
             if(_applyCurrentMoveTarget)
             {
                 _agent.SetDestination(_currentMoveTarget);
                 _agent.isStopped = false;
+
                 _animator.SetBool("Walk", true);
                 _applyCurrentMoveTarget = false;
             }
@@ -129,7 +137,6 @@ public class EnemyBehaviour : MonoBehaviour
                      _currentState = State.IDLE; //Is this right?!
                     _animator.SetBool("Walk", false);
                     _rotator = transform.DOLookAt(_playerTransform.position, 0.2f, AxisConstraint.Y).OnComplete(()=> _rotator = null);
-
                 }
             }
         }
@@ -147,6 +154,28 @@ public class EnemyBehaviour : MonoBehaviour
         MoveTo(GetRandomLocationOnNavmesh());          //Adjust Y-Pos                 
     }
 
+    public void MoveInAttackRange()
+    {
+        Vector3 moveTarget;
+        while (true)
+        {
+            moveTarget = GetRandomLocationOnNavmesh();
+            if (Vector3.Distance(moveTarget, _playerTransform.position) < Vector3.Distance(transform.position, _playerTransform.position))
+            {
+                MoveTo(moveTarget);
+                break;
+            }
+        }
+    }
+
+    public void ApplyPushBack(Vector3 dir)
+    {
+        Debug.Log(dir);
+        dir.y = 0;
+        //_rigid.AddForce(dir.normalized * Data.PushBackMultiplier, ForceMode.Impulse);
+        //_rigid.velocity = dir * Data.PushBackMultiplier;
+    }
+
     #endregion
 
     public void MoveTo(Vector3 target)
@@ -160,21 +189,27 @@ public class EnemyBehaviour : MonoBehaviour
 
     
     [SerializeField]
-    private float _attackTimer;
+    protected float _attackTimer;
     [SerializeField]
-    private bool _isAttacking;
+    protected bool _isAttacking;
     [SerializeField]
-    private int _consecutiveAttackCounter;
+    protected int _consecutiveAttackCounter;
 
     public virtual void UpdateAttack()
     {
         if (_attackTimer > 1 / Data.AttackSpeed)
         {
+            if(Vector3.Distance(_playerTransform.position, transform.position) > Data.AttackRange)
+            {
+                MoveInAttackRange();
+                return;
+            }
+
             _attackTimer = 0;
             _consecutiveAttackCounter++;
 
             _rotator = transform.DOLookAt(_playerTransform.position, 0.2f, AxisConstraint.Y).OnComplete(() => _rotator = null); ;
-            _animCatcher.AnimationEvent = () => { Data.EnemyAttack.StartAttack(AttackStartPos.position, _playerTransform.position); _animCatcher.AnimationEvent = null; };
+            _animCatcher.AnimationEvent = () => { Attack.StartAttack(AttackStartPos.position, _playerTransform.position); _animCatcher.AnimationEvent = null; };
             _animator.SetBool("StartAttack", true);
 
             if (_consecutiveAttackCounter >= Data.MaxConsecutiveAttacks)
@@ -183,6 +218,7 @@ public class EnemyBehaviour : MonoBehaviour
                 _consecutiveAttackCounter = 0;
                 _nextState = State.MOVE;
                 _currentState = State.IDLE;
+                return;
             }
         }
         else
@@ -207,7 +243,9 @@ public class EnemyBehaviour : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
-        _animCatcher = GetComponentInChildren<AnimationEventCatcher>();        
+        _animCatcher = GetComponentInChildren<AnimationEventCatcher>();
+        _rigid = GetComponent<Rigidbody>();
+        Health = Data.MaxHealth;
     }
 
     public void IsBeingAttacked(bool isBeingAttacked)
@@ -215,8 +253,10 @@ public class EnemyBehaviour : MonoBehaviour
         AttackedMarker.enabled = isBeingAttacked;
     }
 
-    public void GetDamage(float dmg)
+    public void GetDamage(float dmg, Vector3 impactDirection)
     {
+        ApplyPushBack(impactDirection);
+
         Health = Mathf.Clamp(Health - dmg,0,10000);
        
 
@@ -229,11 +269,10 @@ public class EnemyBehaviour : MonoBehaviour
     public virtual void Die()
     {
         _currentState = State.DEFAULT;
+        _animCatcher.AnimationEvent = null;
         _enemyMan.UnregisterEnemy(this);
         _agent.velocity = Vector3.zero;
-        _agent.isStopped = true;
-        _agent.enabled = false;
-        _animator.SetTrigger("Die");
+        _agent.enabled = false;                
         IsBeingAttacked(false);
         MainCollider.enabled = false;
         Invoke("DestroyThis", 2);

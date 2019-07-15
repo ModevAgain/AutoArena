@@ -6,9 +6,12 @@ using DG.Tweening;
 
 public class CameraManager : MonoBehaviour
 {
-
+    public CinemachineBrain Brain;
     public CinemachineVirtualCamera FallingCam;
     public CinemachineVirtualCamera GameCam;
+    public CinemachineVirtualCamera DiceCam;
+
+    public CinemachineDollyCart Cart_DiceCam;
 
     private CinemachineBasicMultiChannelPerlin _noiseComponentGame;
     private CinemachineBasicMultiChannelPerlin _noiseComponentFalling;
@@ -45,5 +48,24 @@ public class CameraManager : MonoBehaviour
             _noiseComponentGame.m_FrequencyGain = 0;
             _noiseComponentGame.m_AmplitudeGain = 0;
         });
+    }
+
+    public void ToggleGameCam()
+    {
+        GameCam.enabled = true;
+        DiceCam.enabled = false;
+        FallingCam.enabled = false;
+    }
+
+    public void ToggleDiceCamera()
+    {
+        DiceCam.enabled = true;
+        GameCam.enabled = false;
+        FallingCam.enabled = false;
+    }
+
+    public void DriveDiveCamera(System.Action driveFinished)
+    {
+        DOVirtual.Float(0, 1, 3, (f) => Cart_DiceCam.m_Position = f).SetDelay(1).SetEase(Ease.InOutSine).OnComplete(() => driveFinished?.Invoke());        
     }
 }

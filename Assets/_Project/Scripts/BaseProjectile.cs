@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class BaseProjectile : MonoBehaviour
 {
@@ -61,15 +62,14 @@ public class BaseProjectile : MonoBehaviour
     }
 
     public virtual void OnTriggerEnter(Collider other)
-    {       
-        if(other.tag == "Wall")
-        {
-            Destroy(this.gameObject);
-        }
+    {
 
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
 
         if (MuzzleFlash != null)
             Destroy(MuzzleFlash.gameObject);
+
+        DOVirtual.DelayedCall(0.7f, () => { Destroy(gameObject); });
+
     }
 }

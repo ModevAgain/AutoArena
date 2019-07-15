@@ -97,7 +97,8 @@ MonoBehaviour:
   AttackStartPos: {fileID: 0}
   HealthBar: {fileID: 0}
   Data: {fileID: 0}
-  Health: 100
+  Attack: {fileID: 0}
+  Health: 1000
   AttackedMarker: {fileID: 4570939904419131576}
   MainCollider: {fileID: 0}
   _currentState: 0
@@ -347,10 +348,15 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 67c5bc9cb9912ec49a019aea6af35193, type: 2}
-    - target: {fileID: 3902871862563671812, guid: d4ffd6192ccc9c74899bdcf23147c3aa,
+    - target: {fileID: 7235168249065764551, guid: d4ffd6192ccc9c74899bdcf23147c3aa,
         type: 3}
-      propertyPath: m_Mesh
-      value: 
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7235168249065764551, guid: d4ffd6192ccc9c74899bdcf23147c3aa,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9002659031328101924, guid: d4ffd6192ccc9c74899bdcf23147c3aa,
         type: 3}
@@ -711,6 +717,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Tangents.Array.data[56].z
       value: NaN
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902871862563671812, guid: d4ffd6192ccc9c74899bdcf23147c3aa,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4ffd6192ccc9c74899bdcf23147c3aa, type: 3}

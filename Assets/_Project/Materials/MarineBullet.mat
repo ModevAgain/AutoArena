@@ -67,8 +67,8 @@ Material:
     - _Cutoff: 0
     - _DistortionBlend: 0.5
     - _DistortionEnabled: 0
-    - _DistortionStrength: 1
-    - _DistortionStrengthScaled: 0.1
+    - _DistortionStrength: 87.97
+    - _DistortionStrengthScaled: 8.797
     - _DstBlend: 10
     - _EnableExternalAlpha: 0
     - _EnvironmentReflections: 1

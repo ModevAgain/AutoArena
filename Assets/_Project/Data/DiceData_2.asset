@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a46621a9e44494a4ab3e2a7a6381ba44, type: 3}
+  m_Name: DiceData_2
+  m_EditorClassIdentifier: 
+  Faces:
+  - Direction: 1
+    Item: {fileID: 11400000, guid: 33c0553a59b70e84e87c9a73ba5adf5c, type: 2}
+  - Direction: 0
+    Item: {fileID: 11400000, guid: 4f3843da566f063478de840876ec29d0, type: 2}
+  - Direction: 4
+    Item: {fileID: 11400000, guid: 4f3843da566f063478de840876ec29d0, type: 2}
+  - Direction: 5
+    Item: {fileID: 11400000, guid: 2403a0e9995add3498252a2cdf1b9b31, type: 2}
+  - Direction: 3
+    Item: {fileID: 11400000, guid: 2403a0e9995add3498252a2cdf1b9b31, type: 2}
+  - Direction: 2
+    Item: {fileID: 11400000, guid: 362a33896cd170949b54a81c851d398d, type: 2}
+  TextureOffset: {x: 0.5, y: 0.5}

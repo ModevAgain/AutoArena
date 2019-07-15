@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBaseAttack : ScriptableObject
+public class EnemyBaseAttack : MonoBehaviour
 {
     public float Damage;
     public float Range;
@@ -23,5 +23,8 @@ public class EnemyBaseAttack : ScriptableObject
         AttackFinished?.Invoke();
     }
     
+    public virtual void AbortAttack()
+    {
 
+    }
 }

@@ -8,6 +8,10 @@ public class EnemyData : ScriptableObject
     [Header("Idle")]
     public float IdleTime;
 
+    [Header("General")]
+    public float MaxHealth;
+    public float PushBackMultiplier;
+
     [Header("Movement")]
     public float MoveSpeed;
     public float MoveRange;
@@ -15,8 +19,8 @@ public class EnemyData : ScriptableObject
 
     [Header("Attacks")]
     public float AttackSpeed;
+    public float AttackRange;
     public int MaxConsecutiveAttacks;
-    public EnemyBaseAttack EnemyAttack;
 
     
 }
