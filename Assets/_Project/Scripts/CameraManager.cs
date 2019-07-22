@@ -68,4 +68,9 @@ public class CameraManager : MonoBehaviour
     {
         DOVirtual.Float(0, 1, 3, (f) => Cart_DiceCam.m_Position = f).SetDelay(1).SetEase(Ease.InOutSine).OnComplete(() => driveFinished?.Invoke());        
     }
+
+    public void ResetDiceDiveCam()
+    {        
+        Cart_DiceCam.m_Position = 0;
+    }
 }

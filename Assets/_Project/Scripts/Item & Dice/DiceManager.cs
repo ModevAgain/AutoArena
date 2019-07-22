@@ -74,9 +74,11 @@ public class DiceManager : MonoBehaviour
 
     }
 
-    public void SetStats(PlayerData.Stats stats)
+    public void SetStatsAndPrepare(PlayerData.Stats stats)
     {
         _playerStats = stats;
+        _diceWasThrown = false;
+        _camMan.ResetDiceDiveCam();
     }
 
     public void ShowStats()
@@ -91,6 +93,8 @@ public class DiceManager : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
+
+        _spawnedDice.Clear();
 
         Text.DOFade(1, 0);
         _statsMan.HideStats();

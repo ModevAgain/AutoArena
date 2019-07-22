@@ -170,7 +170,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void ApplyPushBack(Vector3 dir)
     {
-        Debug.Log(dir);
+        //Debug.Log(dir);
         dir.y = 0;
         //_rigid.AddForce(dir.normalized * Data.PushBackMultiplier, ForceMode.Impulse);
         //_rigid.velocity = dir * Data.PushBackMultiplier;

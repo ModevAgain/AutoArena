@@ -35,7 +35,7 @@ public class GameStateManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         _camMan.ToggleDiceCamera();
-        _diceMan.SetStats(_playerData.PlayerStats);
+        _diceMan.SetStatsAndPrepare(_playerData.PlayerStats);
         yield return new WaitForSeconds(_camMan.Brain.m_DefaultBlend.m_Time);
         _diceMan.enabled = true;
     }

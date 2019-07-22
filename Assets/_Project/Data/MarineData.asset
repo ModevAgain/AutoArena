@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MarineData
   m_EditorClassIdentifier: 
   IdleTime: 1.2
-  MaxHealth: 20000
+  MaxHealth: 100
   PushBackMultiplier: 17.16
   MoveSpeed: 1.5
   MoveRange: 9
